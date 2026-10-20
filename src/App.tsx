@@ -15,10 +15,13 @@ import { MyDocumentsScreen } from './components/documents/MyDocumentsScreen';
 import { ProfileScreen } from './components/profile/ProfileScreen';
 import { SmartChecklistModal } from './components/checklist/SmartChecklistModal';
 import { DemandeGeneratorModal } from './components/demande/DemandeGeneratorModal';
-import { AlertTriangle, Check } from 'lucide-react';
+import { AlertTriangle, Check, WifiOff } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'home' | 'assistant' | 'explore' | 'documents' | 'profile'>('home');
+  const [isOnline, setIsOnline] = useState<boolean>(() =>
+    typeof navigator !== 'undefined' ? navigator.onLine : true
+  );
   const [language, setLanguage] = useState<Language>(() => {
     return storage.getProfile().preferredLanguage || 'darija';
   });
@@ -59,8 +62,39 @@ export default function App() {
     setShowFirstLaunchDisclaimer(false);
   };
 
+  // Listen for online/offline events for PWA offline resilience
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
   return (
     <>
+      {/* Offline Status Notice Banner */}
+      {!isOnline && (
+        <div
+          dir={language === 'ar' || language === 'darija' ? 'rtl' : 'ltr'}
+          className="bg-amber-600 text-white text-[11px] font-bold py-1.5 px-3 text-center flex items-center justify-center gap-2 shadow-md z-50 sticky top-0"
+        >
+          <WifiOff className="w-3.5 h-3.5 shrink-0" />
+          <span>
+            {language === 'darija'
+              ? 'وضع بدون أنترنت شغال: تقدر تشوف المساطر، توجد اللوائح وتكتب الطلبات محلياً.'
+              : language === 'ar'
+              ? 'وضع العمل بدون إنترنت مفعّل: تصفح المساطر، إعداد اللوائح وتوليد الطلبات متاح محلياً.'
+              : 'Mode hors-ligne actif : consultation des démarches, checklists et modèles de demandes disponibles localement.'}
+          </span>
+        </div>
+      )}
+
       <MobileShell
         activeTab={activeTab}
         onTabChange={(tab) => {
