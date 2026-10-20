@@ -1,0 +1,6 @@
+{
+  "name": "Wach Nqder? 🇲🇦 - Smart Moroccan Administrative Assistant",
+  "description": "Smart Moroccan administrative assistant helping citizens and students navigate official procedures, checklists, document scanning, and request generation in Darija, Arabic, and French.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

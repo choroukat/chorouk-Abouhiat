@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022c22" />
+      <stop offset="50%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Outer Ring -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#10b981" stroke-width="4" stroke-opacity="0.3" />
+
+  <!-- Document Silhouette -->
+  <g filter="url(#shadow)">
+    <rect x="156" y="116" width="200" height="260" rx="20" fill="#ffffff" />
+    <path d="M 296 116 L 356 176 L 296 176 Z" fill="#e2e8f0" />
+    <line x1="196" y1="200" x2="316" y2="200" stroke="#059669" stroke-width="12" stroke-linecap="round" />
+    <line x1="196" y1="236" x2="316" y2="236" stroke="#cbd5e1" stroke-width="10" stroke-linecap="round" />
+    <line x1="196" y1="270" x2="276" y2="270" stroke="#cbd5e1" stroke-width="10" stroke-linecap="round" />
+  </g>
+
+  <!-- Moroccan Star Badge -->
+  <g filter="url(#shadow)" transform="translate(256, 330)">
+    <circle cx="0" cy="0" r="62" fill="#c1272d" stroke="#ffffff" stroke-width="5" />
+    <!-- 5-Pointed Interlocking Star (Seal of Solomon) -->
+    <path d="M 0 -40 L 11 -12 L 38 -12 L 17 4 L 25 32 L 0 16 L -25 32 L -17 4 L -38 -12 L -11 -12 Z"
+          fill="none" stroke="#006233" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" />
+    <circle cx="0" cy="0" r="5" fill="#006233" />
+  </g>
+</svg>
